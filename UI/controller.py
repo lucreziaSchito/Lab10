@@ -17,3 +17,4 @@ class Controller:
         * Lista di Collegamenti che superano l'importo indicato come soglia
         """
         # TODO
+        # devi inserire l'alert
