@@ -18,9 +18,7 @@ class Controller:
         """
         # TODO
         count = 0
-        if self._view.importo_medio_minimo.value == "":
-            self._view.show_alert("Deve inserire una soglia in euro prima di proseguire")
-        else :
+        if self._view.importo_medio_minimo.value.isdigit():
             grafo = self._model.costruisci_grafo(self._view.importo_medio_minimo.value)
             self._view.lista_visualizzazione.controls.clear()
             self._view.lista_visualizzazione.controls.append(
@@ -32,7 +30,12 @@ class Controller:
                 # Ogni elemento restituito da questo metodo è una tupla composta da (nodo_u, nodo_v, attributi = {})
                 count = count + 1
                 self._view.lista_visualizzazione.controls.append(
-                    ft.Text(f"{count}) {collegamento[0].nome} ({collegamento[0].provincia}) -> {collegamento[1].nome} ({collegamento[1].provincia}) "
-                            f"-- Importo medio per bonifico: € {collegamento[2]["weight"]:.2f}"))
+                    ft.Text(
+                        f"{count}) {collegamento[0].nome} ({collegamento[0].provincia}) -> {collegamento[1].nome} ({collegamento[1].provincia}) "
+                        f"-- Importo medio per bonifico: € {collegamento[2]["weight"]:.2f}"))
             self._view.update()
+
+        else :
+            self._view.show_alert("Deve inserire una soglia adeguata prima di proseguire")
+            return
 
